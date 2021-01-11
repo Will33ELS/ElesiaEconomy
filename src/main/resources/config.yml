@@ -1,0 +1,12 @@
+sqlLite:
+  enable: true
+  file: "database.sql"
+mysql:
+  enable: false
+  host:
+  bdd:
+  username:
+  password:
+config:
+  currencyName: "EURO"
+  currencySign: "€"

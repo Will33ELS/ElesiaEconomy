@@ -1,0 +1,6 @@
+main: com.elesia.economy.ElesiaEconomy
+name: ElesiaEconomy
+version: 1.0-SNAPSHOT
+author: Will33_
+api-version: "1.16"
+commands:
