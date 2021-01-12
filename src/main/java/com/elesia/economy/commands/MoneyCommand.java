@@ -2,14 +2,9 @@ package com.elesia.economy.commands;
 
 import com.elesia.economy.api.AbstractCommand;
 import com.elesia.economy.commands.subcommands.*;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
+import org.bukkit.command.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Classe de la commande principale /money [args]...
@@ -52,11 +47,43 @@ public class MoneyCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        if(strings.length == 0){
+            subCommands.get("balance").onCommand(commandSender, strings);
+        }else{
+            if(subCommands.containsKey(strings[0].toLowerCase())){
+                subCommands.get(strings[0].toLowerCase()).onCommand(commandSender, strings);
+            }else{
+                subCommands.get("help").onCommand(commandSender, strings);
+            }
+        }
         return false;
     }
 
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
-        return null;
+        List<String> args = new ArrayList<>();
+        if(strings.length == 1){
+            if(commandSender.hasPermission("money.balance"))
+                args.add("balance");
+            if(commandSender.hasPermission("money.create"))
+                args.add("create");
+            if(commandSender.hasPermission("money.delete"))
+                args.add("delete");
+            if(commandSender.hasPermission("money.give"))
+                args.add("give");
+            args.add("help");
+            if(commandSender.hasPermission("money.pay"))
+                args.add("pay");
+            if(commandSender.hasPermission("money.set"))
+                args.add("set");
+            if(commandSender.hasPermission("money.take"))
+                args.add("take");
+            if(commandSender instanceof ConsoleCommandSender){
+                args.add("resetall");
+                args.add("deleteall");
+            }
+        }else if(strings.length > 1)
+            args = subCommands.containsKey(strings[0].toLowerCase()) ? subCommands.get(strings[0].toLowerCase()).getTabCompleter(commandSender, strings) : Collections.emptyList();
+        return args;
     }
 }
