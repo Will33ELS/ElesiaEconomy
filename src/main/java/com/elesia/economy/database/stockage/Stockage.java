@@ -7,6 +7,8 @@ import com.elesia.economy.exception.EconomyException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -124,5 +126,22 @@ public class Stockage implements IStockage {
         }catch (SQLException err){
             err.printStackTrace();
         }
+    }
+
+    @Override
+    public List<UUID> getAccounts() {
+        List<UUID> accounts = new ArrayList<>();
+        try{
+            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("SELECT playerUUID FROM "+this.isqlBridge.getTablePrefix()+"_account");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                accounts.add(UUID.fromString(resultSet.getString("playerUUID")));
+            }
+            resultSet.close();
+            preparedStatement.close();
+        }catch (SQLException err){
+            err.printStackTrace();
+        }
+        return accounts;
     }
 }

@@ -2,6 +2,7 @@ package com.elesia.economy.api;
 
 import com.elesia.economy.exception.EconomyException;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface IStockage {
@@ -58,4 +59,10 @@ public interface IStockage {
      * @throws EconomyException
      */
     void deleteAccount(UUID playerUUID) throws EconomyException;
+
+    /**
+     * Récupérer la liste des comptes existants
+     * @return
+     */
+    List<UUID> getAccounts();
 }

@@ -21,10 +21,10 @@ permissions:
     default: false
   money.take:
     default: op
+  money.set:
+    default: false
   money.create:
     default: op
-  money.reset:
-    default: false
   money.delete:
     default: false
   money.*:
@@ -35,6 +35,6 @@ permissions:
       money.pay: true
       money.give: true
       money.take: true
+      money.set: true
       money.create: true
-      money.reset: true
       money.delete: true

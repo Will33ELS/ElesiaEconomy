@@ -26,7 +26,6 @@ public class MoneyCommand implements CommandExecutor, TabCompleter {
         /money take <joueur> <montant> -> Retirer de l'argent à un joueur
         /money set <joueur> <montant> -> Définir l'argent d'un joueur
         /money create <joueur> -> Créer le compte d'un joueur manuellement
-        /money reset <joueur> -> Reset le compte d'un joueur manuellement
         /money delete <joueur> -> Supprimer le compte d'un joueur manuellement
         /money resetAll -> Reset l'intégralité des comptes joueurs (CONSOLE ONLY)
         /money deleteAll -> Supprimer l'intégralité des comptes joueurs (CONSOLE ONLY)
@@ -41,8 +40,12 @@ public class MoneyCommand implements CommandExecutor, TabCompleter {
     public MoneyCommand(){
         new MoneyBalanceSubCommand(subCommands);
         new MoneyCreateCommand(subCommands);
+        new MoneyDeleteAllSubCommand(subCommands);
+        new MoneyDeleteSubCommand(subCommands);
         new MoneyGiveSubCommand(subCommands);
+        new MoneyHelpSubCommand(subCommands);
         new MoneyPaySubCommand(subCommands);
+        new MoneyResetAllSubCommand(subCommands);
         new MoneySetSubCommand(subCommands);
         new MoneyTakeSubCommand(subCommands);
     }
