@@ -69,6 +69,21 @@ public class Stockage implements IStockage {
     }
 
     @Override
+    public void setMoney(int playerID, double amount) throws EconomyException {
+        if(!isAccountExist(playerID)) throw new EconomyException("Ce joueur ne dispose pas de compte !");
+        if(amount < 0) throw new EconomyException("Le montant à définir doit être supérieur à 0 !");
+        try{
+            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("UPDATE "+this.isqlBridge.getTablePrefix()+"_account SET amount = ? WHERE playerID = ?");
+            preparedStatement.setDouble(1, amount);
+            preparedStatement.setInt(1, playerID);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        }catch (SQLException err){
+            err.printStackTrace();
+        }
+    }
+
+    @Override
     public boolean isAccountExist(int playerID) {
         boolean accountExist = false;
         try{
@@ -89,6 +104,19 @@ public class Stockage implements IStockage {
         if(isAccountExist(playerID)) throw new EconomyException("Ce joueur dispose déjà d'un compte !");
         try{
             PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("INSERT INTO "+this.isqlBridge.getTablePrefix()+"_account (playerID) VALUES (?)");
+            preparedStatement.setInt(1, playerID);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        }catch (SQLException err){
+            err.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteAccount(int playerID) throws EconomyException {
+        if(!isAccountExist(playerID)) throw new EconomyException("Ce joueur ne dispose pas de compte !");
+        try{
+            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("DELETE FROM "+this.isqlBridge.getTablePrefix()+"_account WHERE playerID = ?");
             preparedStatement.setInt(1, playerID);
             preparedStatement.executeUpdate();
             preparedStatement.close();

@@ -11,3 +11,6 @@ mysql:
 config:
   currencyName: "EURO"
   currencySign: "€"
+messages:
+  prefix: "[MONEY]"
+  accountCantCreate: "Votre compte n'a pas pu être créé"

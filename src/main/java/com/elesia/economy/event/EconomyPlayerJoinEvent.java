@@ -1,5 +1,6 @@
 package com.elesia.economy.event;
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
@@ -14,6 +15,7 @@ public class EconomyPlayerJoinEvent extends Event {
     private UUID playerUUID;
     private int playerID;
     public EconomyPlayerJoinEvent(UUID playerUUID){
+        super(!Bukkit.isPrimaryThread());
         this.playerUUID = playerUUID;
         this.playerID = -1; //CETTE VALEUR DOIT ÊTRE DEFINI PAR LA PLATEFORME UTILISANT LE PLUGIN
     }

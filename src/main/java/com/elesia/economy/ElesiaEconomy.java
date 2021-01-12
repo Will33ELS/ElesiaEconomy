@@ -2,6 +2,7 @@ package com.elesia.economy;
 
 import com.elesia.economy.api.ISQLBridge;
 import com.elesia.economy.commands.MoneyCommand;
+import com.elesia.economy.commands.PayCommand;
 import com.elesia.economy.database.MySQLBridge;
 import com.elesia.economy.database.SQLLiteBridge;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -37,7 +38,10 @@ public class ElesiaEconomy extends JavaPlugin {
         getCommand("money").setExecutor(moneyCommand);
         getCommand("money").setTabCompleter(moneyCommand);
 
-
+        // ENREGISTREMENT DE LA COMMANDE /PAY
+        PayCommand payCommand = new PayCommand();
+        getCommand("pay").setExecutor(payCommand);
+        getCommand("pay").setTabCompleter(payCommand);
     }
 
     @Override
