@@ -55,12 +55,6 @@ public class ElesiaEconomy extends JavaPlugin {
     }
 
     /**
-     * Map qui permet de faire le lien entre l'UUID du joueur et l'ID du joueur géré par la plateforme
-     * @return
-     */
-    public Map<UUID, Integer> getPlayerIDs() { return playerIDs; }
-
-    /**
      * Retourne l'instance de la base de données
      * @return
      */
