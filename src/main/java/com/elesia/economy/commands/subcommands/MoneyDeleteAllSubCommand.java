@@ -11,6 +11,8 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -50,5 +52,10 @@ public class MoneyDeleteAllSubCommand extends AbstractCommand {
                     .replace("{success}", String.valueOf(numberAccountDelete))
                     .replace("{error}", String.valueOf(error))));
         }
+    }
+
+    @Override
+    public List<String> getTabCompleter(CommandSender commandSender, String[] arguments) {
+        return Collections.emptyList();
     }
 }

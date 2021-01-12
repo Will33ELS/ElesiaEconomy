@@ -11,6 +11,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class MoneyPaySubCommand extends AbstractCommand {
@@ -71,5 +73,14 @@ public class MoneyPaySubCommand extends AbstractCommand {
         }else{
             commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', EconomyMessage.PREFIX + EconomyMessage.NO_POSSIBLE));
         }
+    }
+
+    @Override
+    public List<String> getTabCompleter(CommandSender commandSender, String[] arguments) {
+        List<String> playersName = new ArrayList<>();
+        if(arguments.length == 2){
+            Bukkit.getOnlinePlayers().forEach(player -> playersName.add(player.getName()));
+        }
+        return playersName;
     }
 }

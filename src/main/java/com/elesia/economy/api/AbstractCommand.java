@@ -2,6 +2,7 @@ package com.elesia.economy.api;
 
 import org.bukkit.command.CommandSender;
 
+import java.util.List;
 import java.util.Map;
 
 public abstract class AbstractCommand {
@@ -25,4 +26,11 @@ public abstract class AbstractCommand {
      */
     public abstract void onCommand(CommandSender commandSender, String[] arguments);
 
+    /**
+     * Tableau récupérer lorsque l'exécuter à la permission
+     * @param commandSender L'exécuteur de la commande
+     * @param arguments Les arguments de la commande
+     * @return Les propositions d'arguments
+     */
+    public abstract List<String> getTabCompleter(CommandSender commandSender, String[] arguments);
 }

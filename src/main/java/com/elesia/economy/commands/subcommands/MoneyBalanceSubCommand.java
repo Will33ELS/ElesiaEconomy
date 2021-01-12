@@ -12,6 +12,9 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class MoneyBalanceSubCommand extends AbstractCommand {
@@ -51,6 +54,16 @@ public class MoneyBalanceSubCommand extends AbstractCommand {
                 sendMoney(commandSender);
             }
         }
+    }
+
+    @Override
+    public List<String> getTabCompleter(CommandSender commandSender, String[] arguments) {
+        if(commandSender.hasPermission("money.balance.other")){
+            List<String> playersName = new ArrayList<>();
+            Bukkit.getOnlinePlayers().forEach(player -> playersName.add(player.getName()));
+            return playersName;
+        }
+        return Collections.emptyList();
     }
 
     /**

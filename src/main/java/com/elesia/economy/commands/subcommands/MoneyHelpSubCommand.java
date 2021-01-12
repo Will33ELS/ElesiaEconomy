@@ -6,6 +6,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class MoneyHelpSubCommand extends AbstractCommand {
@@ -38,5 +40,10 @@ public class MoneyHelpSubCommand extends AbstractCommand {
         if(commandSender instanceof ConsoleCommandSender)
             commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', EconomyMessage.HELP_DELETE_ALL));
         commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', EconomyMessage.HELP_FOOTER));
+    }
+
+    @Override
+    public List<String> getTabCompleter(CommandSender commandSender, String[] arguments) {
+        return Collections.emptyList();
     }
 }

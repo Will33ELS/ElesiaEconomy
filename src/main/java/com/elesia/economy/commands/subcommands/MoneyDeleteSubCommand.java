@@ -5,12 +5,13 @@ import com.elesia.economy.api.AbstractCommand;
 import com.elesia.economy.api.IStockage;
 import com.elesia.economy.exception.EconomyException;
 import com.elesia.economy.manager.EconomyMessage;
-import com.elesia.economy.utils.FormatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class MoneyDeleteSubCommand extends AbstractCommand {
@@ -49,5 +50,14 @@ public class MoneyDeleteSubCommand extends AbstractCommand {
                 }
             }
         }
+    }
+
+    @Override
+    public List<String> getTabCompleter(CommandSender commandSender, String[] arguments) {
+        List<String> playersName = new ArrayList<>();
+        if(arguments.length == 2){
+            this.stockage.getAccounts().forEach(uuid -> playersName.add(Bukkit.getOfflinePlayer(uuid).getName()));
+        }
+        return playersName;
     }
 }

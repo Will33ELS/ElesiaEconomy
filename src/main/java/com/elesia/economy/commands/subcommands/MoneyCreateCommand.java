@@ -10,6 +10,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class MoneyCreateCommand extends AbstractCommand {
@@ -49,5 +51,10 @@ public class MoneyCreateCommand extends AbstractCommand {
                 }
             }
         }
+    }
+
+    @Override
+    public List<String> getTabCompleter(CommandSender commandSender, String[] arguments) {
+        return Collections.emptyList();
     }
 }

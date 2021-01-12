@@ -27,6 +27,7 @@ messages:
   amountIsNotANumber: "Le montant doit être un nombre !"
   amountIncorrect: "Le montant doit être supérieur à 0 !"
   insufficientBalance: "Vous n'avez pas assez d'argent !"
+  commandPayUsage: "/pay <joueur> <montant>"
   payCommandUsage: "/money pay <joueur> <montant>"
   paymentSentTo: "Vous avez envoyé {money} {currencyName} à {targetName}"
   paymentReceivedFrom: "Vous avez reçu {money} {currencyName} de {fromName}"
