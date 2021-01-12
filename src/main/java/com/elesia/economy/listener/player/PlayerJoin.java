@@ -13,10 +13,10 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class PlayerJoin implements Listener {
 
     /**
-     * Listener appelé en dernier, utilisé pour la définition de l'ID du joueur
+     * Listener appelé pour la création du compte joueur
      * @param event
      */
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
 
