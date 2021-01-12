@@ -3,6 +3,7 @@ package com.elesia.economy.api;
 import com.elesia.economy.exception.EconomyException;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public interface IStockage {
@@ -65,4 +66,11 @@ public interface IStockage {
      * @return
      */
     List<UUID> getAccounts();
+
+    /**
+     * Récupérer le top des joueurs les plus riches
+     * @param maxEntry Nombre maximum d'entrée
+     * @return
+     */
+    Map<UUID, Double> getTop(int maxEntry);
 }

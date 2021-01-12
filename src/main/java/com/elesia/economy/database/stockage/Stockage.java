@@ -7,9 +7,7 @@ import com.elesia.economy.exception.EconomyException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Gestion des rêquetes entre le SGBD et le plugin
@@ -143,5 +141,23 @@ public class Stockage implements IStockage {
             err.printStackTrace();
         }
         return accounts;
+    }
+
+    @Override
+    public Map<UUID, Double> getTop(int maxEntry) {
+        Map<UUID, Double> tops = new HashMap<>();
+        try{
+            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("SELECT playerUUID, amount FROM "+this.isqlBridge.getTablePrefix()+"account ORDER BY amount DESC LIMIT ?");
+            preparedStatement.setInt(1, maxEntry);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                tops.put(UUID.fromString(resultSet.getString("playerUUID")), resultSet.getDouble("amount"));
+            }
+            resultSet.close();
+            preparedStatement.close();
+        }catch (SQLException err){
+            err.printStackTrace();
+        }
+        return tops;
     }
 }
