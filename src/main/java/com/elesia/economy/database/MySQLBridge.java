@@ -37,7 +37,7 @@ public class MySQLBridge implements ISQLBridge {
 
                 // CREATION DE LA TABLE {PREFIX}_account
                 PreparedStatement createTable = this.connection.prepareStatement("CREATE TABLE IF NOT EXISTS ? (" +
-                        "playerID INTEGER PRIMARY KEY UNSIGNED, " +
+                        "playerUUID VARCHAR(255) PRIMARY KEY, " +
                         "amount DOUBLE DEFAULT 0)");
                 createTable.setString(1, this.getTablePrefix()+"_account");
                 createTable.executeUpdate();

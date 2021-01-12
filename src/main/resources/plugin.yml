@@ -3,6 +3,38 @@ name: ElesiaEconomy
 version: 1.0-SNAPSHOT
 author: Will33_
 api-version: "1.16"
+description: "Plugin permettant de gérer le système d'économie"
+website: "https://www.elesia.org"
 commands:
   money:
+    description: "Gestion de la commande principal de la money"
   pay:
+    description: "Payer un joueur"
+permissions:
+  money.balance:
+    default: true
+  money.balance.other:
+    default: op
+  money.pay:
+    default: true
+  money.give:
+    default: false
+  money.take:
+    default: op
+  money.create:
+    default: op
+  money.reset:
+    default: false
+  money.delete:
+    default: false
+  money.*:
+    default: false
+    children:
+      money.balance: true
+      money.balance.other: true
+      money.pay: true
+      money.give: true
+      money.take: true
+      money.create: true
+      money.reset: true
+      money.delete: true
