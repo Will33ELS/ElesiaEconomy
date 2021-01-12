@@ -39,11 +39,10 @@ public class SQLLiteBridge implements ISQLBridge {
             try{
                 this.connection = DriverManager.getConnection("jdbc:sqlite:" + sqlFile.toAbsolutePath());
 
-                // CREATION DE LA TABLE {PREFIX}_account
-                PreparedStatement createTable = this.connection.prepareStatement("CREATE TABLE IF NOT EXISTS ? (" +
+                // CREATION DE LA TABLE {PREFIX}account
+                PreparedStatement createTable = this.connection.prepareStatement("CREATE TABLE IF NOT EXISTS "+this.getTablePrefix()+"account (" +
                         "playerUUID VARCHAR(255) PRIMARY KEY, " +
                         "amount DOUBLE DEFAULT 0)");
-                createTable.setString(1, this.getTablePrefix()+"_account");
                 createTable.executeUpdate();
                 createTable.close();
 

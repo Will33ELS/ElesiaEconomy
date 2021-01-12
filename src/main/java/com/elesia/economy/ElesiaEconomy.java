@@ -5,17 +5,13 @@ import com.elesia.economy.commands.MoneyCommand;
 import com.elesia.economy.commands.PayCommand;
 import com.elesia.economy.database.MySQLBridge;
 import com.elesia.economy.database.SQLLiteBridge;
+import com.elesia.economy.listener.ListenerManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 public class ElesiaEconomy extends JavaPlugin {
 
     private static ElesiaEconomy INSTANCE;
     private ISQLBridge sqlBridge;
-    private Map<UUID, Integer> playerIDs = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -42,6 +38,9 @@ public class ElesiaEconomy extends JavaPlugin {
         PayCommand payCommand = new PayCommand();
         getCommand("pay").setExecutor(payCommand);
         getCommand("pay").setTabCompleter(payCommand);
+
+        //REGISTER DES LISTENERS
+        new ListenerManager().registerListener(this);
     }
 
     @Override

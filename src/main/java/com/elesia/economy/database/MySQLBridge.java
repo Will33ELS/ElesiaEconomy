@@ -36,10 +36,9 @@ public class MySQLBridge implements ISQLBridge {
                 connection = DriverManager.getConnection("jdbc:mysql://" + host + "/" + name + "?autoreconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false", username, password);
 
                 // CREATION DE LA TABLE {PREFIX}_account
-                PreparedStatement createTable = this.connection.prepareStatement("CREATE TABLE IF NOT EXISTS ? (" +
+                PreparedStatement createTable = this.connection.prepareStatement("CREATE TABLE IF NOT EXISTS "+this.getTablePrefix()+"account (" +
                         "playerUUID VARCHAR(255) PRIMARY KEY, " +
                         "amount DOUBLE DEFAULT 0)");
-                createTable.setString(1, this.getTablePrefix()+"_account");
                 createTable.executeUpdate();
                 createTable.close();
 

@@ -25,7 +25,7 @@ public class Stockage implements IStockage {
     public Double getBalance(UUID playerUUID) throws EconomyException {
         double amount = 0.0D;
         try{
-            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("SELECT amount FROM "+this.isqlBridge.getTablePrefix()+"_account WHERE playerUUID = ?");
+            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("SELECT amount FROM "+this.isqlBridge.getTablePrefix()+"account WHERE playerUUID = ?");
             preparedStatement.setString(1, playerUUID.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             if(!resultSet.next()) throw new EconomyException("Ce joueur ne dispose pas de compte !");
@@ -46,7 +46,7 @@ public class Stockage implements IStockage {
         if(amount > playerSolde) throw new EconomyException("Le joueur n'a pas assez d'argent !");
         if(amount <= 0) throw new EconomyException("Le montant retiré doit être supérieur à 0 !");
         try{
-            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("UPDATE "+this.isqlBridge.getTablePrefix()+"_account SET amount = amount - ? WHERE playerUUID = ?");
+            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("UPDATE "+this.isqlBridge.getTablePrefix()+"account SET amount = amount - ? WHERE playerUUID = ?");
             preparedStatement.setDouble(1, amount);
             preparedStatement.setString(2, playerUUID.toString());
             preparedStatement.executeUpdate();
@@ -61,7 +61,7 @@ public class Stockage implements IStockage {
         if(!isAccountExist(playerUUID)) throw new EconomyException("Ce joueur ne dispose pas de compte !");
         if(amount <= 0) throw new EconomyException("Le montant à ajouté doit être supérieur à 0 !");
         try{
-            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("UPDATE "+this.isqlBridge.getTablePrefix()+"_account SET amount = amount + ? WHERE playerUUID = ?");
+            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("UPDATE "+this.isqlBridge.getTablePrefix()+"account SET amount = amount + ? WHERE playerUUID = ?");
             preparedStatement.setDouble(1, amount);
             preparedStatement.setString(2, playerUUID.toString());
             preparedStatement.executeUpdate();
@@ -76,7 +76,7 @@ public class Stockage implements IStockage {
         if(!isAccountExist(playerUUID)) throw new EconomyException("Ce joueur ne dispose pas de compte !");
         if(amount < 0) throw new EconomyException("Le montant à définir doit être supérieur à 0 !");
         try{
-            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("UPDATE "+this.isqlBridge.getTablePrefix()+"_account SET amount = ? WHERE playerUUID = ?");
+            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("UPDATE "+this.isqlBridge.getTablePrefix()+"account SET amount = ? WHERE playerUUID = ?");
             preparedStatement.setDouble(1, amount);
             preparedStatement.setString(1, playerUUID.toString());
             preparedStatement.executeUpdate();
@@ -90,7 +90,7 @@ public class Stockage implements IStockage {
     public boolean isAccountExist(UUID playerUUID) {
         boolean accountExist = false;
         try{
-            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("SELECT amount FROM "+this.isqlBridge.getTablePrefix()+"_account WHERE playerUUID = ?");
+            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("SELECT amount FROM "+this.isqlBridge.getTablePrefix()+"account WHERE playerUUID = ?");
             preparedStatement.setString(1, playerUUID.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             accountExist = resultSet.next();
@@ -106,7 +106,7 @@ public class Stockage implements IStockage {
     public void createAccount(UUID playerUUID) throws EconomyException {
         if(isAccountExist(playerUUID)) throw new EconomyException("Ce joueur dispose déjà d'un compte !");
         try{
-            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("INSERT INTO "+this.isqlBridge.getTablePrefix()+"_account (playerUUID) VALUES (?)");
+            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("INSERT INTO "+this.isqlBridge.getTablePrefix()+"account (playerUUID) VALUES (?)");
             preparedStatement.setString(1, playerUUID.toString());
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -119,7 +119,7 @@ public class Stockage implements IStockage {
     public void deleteAccount(UUID playerUUID) throws EconomyException {
         if(!isAccountExist(playerUUID)) throw new EconomyException("Ce joueur ne dispose pas de compte !");
         try{
-            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("DELETE FROM "+this.isqlBridge.getTablePrefix()+"_account WHERE playerUUID = ?");
+            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("DELETE FROM "+this.isqlBridge.getTablePrefix()+"account WHERE playerUUID = ?");
             preparedStatement.setString(1, playerUUID.toString());
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -132,7 +132,7 @@ public class Stockage implements IStockage {
     public List<UUID> getAccounts() {
         List<UUID> accounts = new ArrayList<>();
         try{
-            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("SELECT playerUUID FROM "+this.isqlBridge.getTablePrefix()+"_account");
+            PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("SELECT playerUUID FROM "+this.isqlBridge.getTablePrefix()+"account");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 accounts.add(UUID.fromString(resultSet.getString("playerUUID")));
