@@ -2,6 +2,8 @@ package com.elesia.economy.database;
 
 import com.elesia.economy.ElesiaEconomy;
 import com.elesia.economy.api.ISQLBridge;
+import com.elesia.economy.api.IStockage;
+import com.elesia.economy.database.stockage.Stockage;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,6 +17,7 @@ import java.sql.SQLException;
 public class SQLLiteBridge implements ISQLBridge {
     private final Path sqlFile;
     private Connection connection;
+    private IStockage iStockage;
 
     /* CREATION DU FICHIER SQL S'IL N'EXISTE PAS */
     public SQLLiteBridge(String fileName){
@@ -26,6 +29,7 @@ public class SQLLiteBridge implements ISQLBridge {
             err.printStackTrace();
         }
         this.setup();
+        this.iStockage = new Stockage(this);
     }
 
 
@@ -35,7 +39,13 @@ public class SQLLiteBridge implements ISQLBridge {
             try{
                 this.connection = DriverManager.getConnection("jdbc:sqlite:" + sqlFile.toAbsolutePath());
 
-                //TODO CREATION DES TABLES
+                // CREATION DE LA TABLE {PREFIX}_account
+                PreparedStatement createTable = this.connection.prepareStatement("CREATE TABLE IF NOT EXISTS ? (" +
+                        "playerID INTEGER PRIMARY KEY UNSIGNED, " +
+                        "amount DOUBLE DEFAULT 0)");
+                createTable.setString(1, this.getTablePrefix()+"_account");
+                createTable.executeUpdate();
+                createTable.close();
 
             }catch (SQLException err){
                 err.printStackTrace();
@@ -58,13 +68,25 @@ public class SQLLiteBridge implements ISQLBridge {
         return this.connection;
     }
 
+    /* RETOURNE UN CHAMP VIDE CAR LA BASE DE DONNEES ET UNIQUEMENT UTILISEE PAR LE PLUGIN */
+    @Override
+    public String getTablePrefix() {
+        return "";
+    }
+
     /* FERMETURE DE LA CONNEXION */
-    private void shutdownDataSource() throws Exception{
+    public void shutdownDataSource() throws Exception{
         try {
             this.connection.close();
         } catch (SQLException e) {
             throw new Exception("Erreur: "+e.getMessage());
         }
+    }
+
+    /* RECUPERATION DE L'INSTANCE DE LA CLASSE STOCKAGE */
+    @Override
+    public IStockage getStockage() {
+        return this.iStockage;
     }
 
     /* VERIFICATION DE LA CONNEXION*/
