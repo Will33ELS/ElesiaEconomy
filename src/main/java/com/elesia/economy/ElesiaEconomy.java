@@ -3,9 +3,11 @@ package com.elesia.economy;
 import com.elesia.economy.api.ISQLBridge;
 import com.elesia.economy.commands.MoneyCommand;
 import com.elesia.economy.commands.PayCommand;
+import com.elesia.economy.convert.ConvertCraftConomy;
 import com.elesia.economy.database.MySQLBridge;
 import com.elesia.economy.database.SQLLiteBridge;
 import com.elesia.economy.listener.ListenerManager;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ElesiaEconomy extends JavaPlugin {
@@ -41,6 +43,13 @@ public class ElesiaEconomy extends JavaPlugin {
 
         //REGISTER DES LISTENERS
         new ListenerManager().registerListener(this);
+
+        //CONVERTISSEUR PLUGIN
+        if(Bukkit.getServer().getPluginManager().getPlugin("CraftConomy3") != null) {
+            new ConvertCraftConomy().convert();
+            getLogger().warning("Vous devez maintenant supprimer le plugin CraftConomy");
+            getServer().shutdown();
+        }
     }
 
     @Override

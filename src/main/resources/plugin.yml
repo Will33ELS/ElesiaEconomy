@@ -5,6 +5,7 @@ author: Will33_
 api-version: "1.16"
 description: "Plugin permettant de gérer le système d'économie"
 website: "https://www.elesia.org"
+softdepend: [CraftConomy3]
 commands:
   money:
     description: "Gestion de la commande principal de la money"
