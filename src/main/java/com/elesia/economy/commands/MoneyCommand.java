@@ -1,9 +1,7 @@
 package com.elesia.economy.commands;
 
 import com.elesia.economy.api.AbstractCommand;
-import com.elesia.economy.commands.subcommands.MoneyBalanceSubCommand;
-import com.elesia.economy.commands.subcommands.MoneyGiveSubCommand;
-import com.elesia.economy.commands.subcommands.MoneyPaySubCommand;
+import com.elesia.economy.commands.subcommands.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,6 +24,7 @@ public class MoneyCommand implements CommandExecutor, TabCompleter {
         /money pay <joueur> <montant> -> Donner de l'argent à un joueur mais retiré de son compte
         /money give <joueur> <montant> -> Donner de l'argent à un joueur
         /money take <joueur> <montant> -> Retirer de l'argent à un joueur
+        /money set <joueur> <montant> -> Définir l'argent d'un joueur
         /money create <joueur> -> Créer le compte d'un joueur manuellement
         /money reset <joueur> -> Reset le compte d'un joueur manuellement
         /money delete <joueur> -> Supprimer le compte d'un joueur manuellement
@@ -41,8 +40,11 @@ public class MoneyCommand implements CommandExecutor, TabCompleter {
     private final Map<String, AbstractCommand> subCommands = new HashMap<>();
     public MoneyCommand(){
         new MoneyBalanceSubCommand(subCommands);
+        new MoneyCreateCommand(subCommands);
         new MoneyGiveSubCommand(subCommands);
         new MoneyPaySubCommand(subCommands);
+        new MoneySetSubCommand(subCommands);
+        new MoneyTakeSubCommand(subCommands);
     }
 
     @Override

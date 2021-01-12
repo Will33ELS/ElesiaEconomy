@@ -18,7 +18,9 @@ public class EconomyMessage {
     public static final String SOLDE_PLAYER = config.getString("messages.soldePlayer").replace("{currencyName}", EconomySetup.CURRENCY_NAME).replace("{currencySign}", EconomySetup.CURRENCY_SIGN);
     public static final String SOLDE_OTHER_PLAYER = config.getString("messages.soldeOtherPlayer").replace("{currencyName}", EconomySetup.CURRENCY_NAME).replace("{currencySign}", EconomySetup.CURRENCY_SIGN);
     public static final String PLAYER_NO_ACCOUNT = config.getString("messages.playerNoAccount");
+    public static final String PLAYER_HAS_ACCOUNT = config.getString("messages.playerHasAccount");
     public static final String PLAYER_IS_NOT_ONLINE = config.getString("messages.playerIsNotOnline");
+    public static final String PLAYER_INSUFFICIENT_BALANCE = config.getString("messages.playerInsufficientBalance");
     public static final String AMOUNT_IS_NOT_A_NUMBER = config.getString("messages.amountIsNotANumber");
     public static final String AMOUNT_INCORRECT = config.getString("messages.amountIncorrect");
     public static final String INSUFFICIENT_BALANCE = config.getString("messages.insufficientBalance");
@@ -28,5 +30,13 @@ public class EconomyMessage {
     public static final String GIVE_COMMAND_USAGE = config.getString("messages.giveCommandUsage");
     public static final String YOU_RECEIVED = config.getString("messages.youReceived").replace("{currencyName}", EconomySetup.CURRENCY_NAME).replace("{currencySign}", EconomySetup.CURRENCY_SIGN);
     public static final String YOU_GIVE_TO = config.getString("messages.youGiveTo").replace("{currencyName}", EconomySetup.CURRENCY_NAME).replace("{currencySign}", EconomySetup.CURRENCY_SIGN);
+    public static final String TAKE_COMMAND_USAGE = config.getString("messages.takeCommandUsage");
+    public static final String YOU_LOST = config.getString("messages.youLost").replace("{currencyName}", EconomySetup.CURRENCY_NAME).replace("{currencySign}", EconomySetup.CURRENCY_SIGN);
+    public static final String YOU_TAKE_TO = config.getString("messages.youTakeTo").replace("{currencyName}", EconomySetup.CURRENCY_NAME).replace("{currencySign}", EconomySetup.CURRENCY_SIGN);
+    public static final String CREATE_COMMAND_USAGE = config.getString("messages.createCommandUsage");
+    public static final String CREATE_ACCOUNT_TO = config.getString("messages.createAccountTo");
+    public static final String SET_COMMAND_USAGE = config.getString("messages.setCommandUsage");
+    public static final String YOU_SET = config.getString("messages.youSet").replace("{currencyName}", EconomySetup.CURRENCY_NAME).replace("{currencySign}", EconomySetup.CURRENCY_SIGN);
+    public static final String YOU_SET_TO = config.getString("messages.youSetTo").replace("{currencyName}", EconomySetup.CURRENCY_NAME).replace("{currencySign}", EconomySetup.CURRENCY_SIGN);
 
 }
