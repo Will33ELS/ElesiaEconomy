@@ -1,5 +1,6 @@
 package com.elesia.economy;
 
+import com.elesia.economy.api.IConvertEconomyPlugin;
 import com.elesia.economy.api.ISQLBridge;
 import com.elesia.economy.commands.MoneyCommand;
 import com.elesia.economy.commands.PayCommand;
@@ -14,6 +15,7 @@ public class ElesiaEconomy extends JavaPlugin {
 
     private static ElesiaEconomy INSTANCE;
     private ISQLBridge sqlBridge;
+    private IConvertEconomyPlugin convertEconomyPlugin;
 
     @Override
     public void onEnable() {
@@ -46,9 +48,8 @@ public class ElesiaEconomy extends JavaPlugin {
 
         //CONVERTISSEUR PLUGIN
         if(Bukkit.getServer().getPluginManager().getPlugin("CraftConomy3") != null) {
-            new ConvertCraftConomy().convert();
-            getLogger().warning("Vous devez maintenant supprimer le plugin CraftConomy");
-            getServer().shutdown();
+            this.convertEconomyPlugin = new ConvertCraftConomy();
+            this.convertEconomyPlugin.convert();
         }
     }
 
@@ -67,6 +68,12 @@ public class ElesiaEconomy extends JavaPlugin {
      * @return
      */
     public ISQLBridge getSqlBridge() { return this.sqlBridge; }
+
+    /**
+     * Retourne l'instance de la convertion en cours
+     * @return
+     */
+    public IConvertEconomyPlugin getConvertEconomyPlugin() { return convertEconomyPlugin; }
 
     /**
      * Retourne l'instance du plugin

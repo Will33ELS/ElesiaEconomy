@@ -76,7 +76,7 @@ public class Stockage implements IStockage {
         try{
             PreparedStatement preparedStatement = this.isqlBridge.getConnection().prepareStatement("UPDATE "+this.isqlBridge.getTablePrefix()+"account SET amount = ? WHERE playerUUID = ?");
             preparedStatement.setDouble(1, amount);
-            preparedStatement.setString(1, playerUUID.toString());
+            preparedStatement.setString(2, playerUUID.toString());
             preparedStatement.executeUpdate();
             preparedStatement.close();
         }catch (SQLException err){

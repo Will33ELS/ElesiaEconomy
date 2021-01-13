@@ -55,7 +55,7 @@ public class MoneyPaySubCommand extends AbstractCommand {
                                                         .replace("{targetName}", target.getName()))));
                                         target.sendMessage(ChatColor.translateAlternateColorCodes('&', EconomyMessage.PREFIX + EconomyMessage.PAYMENT_RECEIVED_FROM
                                                 .replace("{money}", FormatUtils.formatCurrency(montant)
-                                                        .replace("{targetName}", player.getName()))));
+                                                        .replace("{fromName}", player.getName()))));
                                     }
                                 } catch (EconomyException err) {
                                     // Une erreur est survenue
