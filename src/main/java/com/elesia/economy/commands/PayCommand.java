@@ -57,8 +57,8 @@ public class PayCommand implements CommandExecutor, TabCompleter {
                                                 .replace("{money}", FormatUtils.formatCurrency(montant)
                                                         .replace("{targetName}", target.getName()))));
                                         target.sendMessage(ChatColor.translateAlternateColorCodes('&', EconomyMessage.PREFIX + EconomyMessage.PAYMENT_RECEIVED_FROM
-                                                .replace("{money}", FormatUtils.formatCurrency(montant)
-                                                        .replace("{fromName}", player.getName()))));
+                                                .replace("{money}", FormatUtils.formatCurrency(montant))
+                                                        .replace("{fromName}", player.getName())));
                                     }
                                 } catch (EconomyException err) {
                                     // Une erreur est survenue
