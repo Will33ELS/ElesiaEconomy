@@ -51,8 +51,8 @@ public class MoneyPaySubCommand extends AbstractCommand {
                                         stockage.removeMoney(player.getUniqueId(), montant); // Retrait du montant sur le solde du joueur
 
                                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', EconomyMessage.PREFIX + EconomyMessage.PAYMENT_SENT_TO
-                                                .replace("{money}", FormatUtils.formatCurrency(montant)
-                                                        .replace("{targetName}", target.getName()))));
+                                                .replace("{money}", FormatUtils.formatCurrency(montant))
+                                                        .replace("{targetName}", target.getName())));
                                         target.sendMessage(ChatColor.translateAlternateColorCodes('&', EconomyMessage.PREFIX + EconomyMessage.PAYMENT_RECEIVED_FROM
                                                 .replace("{money}", FormatUtils.formatCurrency(montant))
                                                         .replace("{fromName}", player.getName())));
