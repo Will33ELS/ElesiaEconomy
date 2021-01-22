@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class MoneyGiveSubCommand extends AbstractCommand {
 
     @Override
     public void onCommand(CommandSender commandSender, String[] arguments) {
-        if(!commandSender.hasPermission("money.give")){
+        if((commandSender instanceof Player) && !commandSender.hasPermission("money.give")){
             commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', EconomyMessage.PREFIX + EconomyMessage.NO_PERMISSION));
         }else{
             if(arguments.length != 3){
