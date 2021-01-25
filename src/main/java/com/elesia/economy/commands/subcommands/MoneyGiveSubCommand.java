@@ -49,8 +49,8 @@ public class MoneyGiveSubCommand extends AbstractCommand {
                                     target.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', EconomyMessage.PREFIX + EconomyMessage.YOU_RECEIVED.replace("{money}", FormatUtils.formatCurrency(montant))));
                                 }
                                 commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', EconomyMessage.PREFIX + EconomyMessage.YOU_GIVE_TO
-                                        .replace("{money}", FormatUtils.formatCurrency(montant)
-                                                .replace("{targetName}", target.getName() == null ? "&cInconnu" : target.getName()))));
+                                        .replace("{money}", FormatUtils.formatCurrency(montant))
+                                                .replace("{targetName}", target.getName() == null ? "&cInconnu" : target.getName())));
                             }catch (EconomyException err){
                                 // Une erreur est survenue
                                 commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', EconomyMessage.PREFIX + EconomyMessage.INTERNAL_ERROR));

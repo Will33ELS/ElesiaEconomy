@@ -52,8 +52,8 @@ public class MoneyTakeSubCommand extends AbstractCommand {
                                         target.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', EconomyMessage.PREFIX + EconomyMessage.YOU_LOST.replace("{money}", FormatUtils.formatCurrency(montant))));
                                     }
                                     commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', EconomyMessage.PREFIX + EconomyMessage.YOU_TAKE_TO
-                                            .replace("{money}", FormatUtils.formatCurrency(montant)
-                                                    .replace("{targetName}", target.getName() == null ? "&cInconnu" : target.getName()))));
+                                            .replace("{money}", FormatUtils.formatCurrency(montant))
+                                                    .replace("{targetName}", target.getName() == null ? "&cInconnu" : target.getName())));
                                 }
                             }catch (EconomyException err){
                                 // Une erreur est survenue
