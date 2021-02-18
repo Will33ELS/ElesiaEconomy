@@ -3,6 +3,7 @@ package com.elesia.economy.database.stockage;
 import com.elesia.economy.api.ISQLBridge;
 import com.elesia.economy.api.IStockage;
 import com.elesia.economy.exception.EconomyException;
+import com.elesia.economy.utils.MapUtil;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -158,6 +159,6 @@ public class Stockage implements IStockage {
         }catch (SQLException err){
             err.printStackTrace();
         }
-        return tops;
+        return MapUtil.sortByValue(tops);
     }
 }
