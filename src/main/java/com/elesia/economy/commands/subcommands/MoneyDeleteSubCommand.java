@@ -56,7 +56,7 @@ public class MoneyDeleteSubCommand extends AbstractCommand {
     public List<String> getTabCompleter(CommandSender commandSender, String[] arguments) {
         List<String> playersName = new ArrayList<>();
         if(arguments.length == 2){
-            this.stockage.getAccounts().forEach(uuid -> playersName.add(Bukkit.getOfflinePlayer(uuid).getName()));
+            Bukkit.getOnlinePlayers().forEach(player -> playersName.add(player.getName()));
         }
         return playersName;
     }
